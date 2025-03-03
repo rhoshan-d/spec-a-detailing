@@ -18,11 +18,11 @@ def all_products(request):
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
 
-        if 'q' in request.GET:
-            query = request.GET['q']
+        if 'search_query' in request.GET:
+            query = request.GET['search_query']
             if not query:
                 messages.error(request, "You didn't enter any search criteria!")
-                return redirect(reverse('products'))
+                return redirect(reverse('search_query'))
             
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
