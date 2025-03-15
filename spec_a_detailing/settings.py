@@ -30,7 +30,10 @@ SECRET_KEY = 'django-insecure-a6gm%h0opllq4p8j!hxcr#uqtm+qsbn0aw%5nhl03ojcb#wjhh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost', # vscode preview
+    '127.0.0.1', # listen for stripe webhooks
+]
 
 
 # Application definition
@@ -175,6 +178,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
 
