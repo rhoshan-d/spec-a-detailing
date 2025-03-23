@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
+
 from .models import Product, Category
+from .forms import ProductForm
 
 # Create your views here.
 
 def all_products(request):
-    """ A view to display all products, including sorting and search queries """
+    """ A view to show all products, including sorting and search queries """
 
     products = Product.objects.all()
     query = None
@@ -22,10 +24,8 @@ def all_products(request):
             if sortkey == 'name':
                 sortkey = 'lower_name'
                 products = products.annotate(lower_name=Lower('name'))
-
             if sortkey == 'category':
                 sortkey = 'category__name'
-
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
@@ -37,8 +37,8 @@ def all_products(request):
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
 
-        if 'search_query' in request.GET:
-            query = request.GET['search_query']
+        if 'q' in request.GET:
+            query = request.GET['q']
             if not query:
                 messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('products'))
@@ -59,7 +59,7 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
-    """ A view to display individual product details """
+    """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
 
@@ -68,3 +68,14 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'products/product_detail.html', context)
+
+
+def add_product(request):
+    """ Add a product to the store """
+    form = ProductForm()
+    template = 'products/add_product.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
