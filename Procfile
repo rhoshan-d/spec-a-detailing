@@ -1,0 +1,1 @@
+web: gunicorn spec_a_detailing.wsgi:application
