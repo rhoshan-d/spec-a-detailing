@@ -3,24 +3,24 @@
         "pk": 1,
         "model": "products.category",
         "fields": {
-            "name": "activewear",
-            "friendly_name": "Activewear"
+            "name": "exterior_services",
+            "friendly_name": "Exterior Services"
         }
     },
     {
         "pk": 2,
         "model": "products.category",
         "fields": {
-            "name": "bed_bath",
-            "friendly_name": "Bed & Bath"
+            "name": "interior_services",
+            "friendly_name": "Interior Services"
         }
     },
     {
         "pk": 3,
         "model": "products.category",
         "fields": {
-            "name": "clearance",
-            "friendly_name": "Clearance"
+            "name": "full_valeting",
+            "friendly_name": "Full Valeting Packages"
         }
     },
     {
@@ -28,47 +28,39 @@
         "model": "products.category",
         "fields": {
             "name": "deals",
-            "friendly_name": "Deals"
+            "friendly_name": "Special Deals"
         }
     },
     {
         "pk": 5,
         "model": "products.category",
         "fields": {
-            "name": "essentials",
-            "friendly_name": "Essentials"
+            "name": "ceramic_coating",
+            "friendly_name": "Ceramic Coating"
         }
     },
     {
         "pk": 6,
         "model": "products.category",
         "fields": {
-            "name": "jeans",
-            "friendly_name": "Jeans"
+            "name": "paint_protection",
+            "friendly_name": "Paint Protection"
         }
     },
     {
         "pk": 7,
         "model": "products.category",
         "fields": {
-            "name": "kitchen_dining",
-            "friendly_name": "Kitchen & Dining"
+            "name": "corporate_fleet",
+            "friendly_name": "Corporate Fleet Services"
         }
     },
     {
         "pk": 8,
         "model": "products.category",
         "fields": {
-            "name": "new_arrivals",
-            "friendly_name": "New Arrivals"
-        }
-    },
-    {
-        "pk": 9,
-        "model": "products.category",
-        "fields": {
-            "name": "shirts",
-            "friendly_name": "Shirts"
+            "name": "gift_vouchers",
+            "friendly_name": "Gift Vouchers"
         }
     }
 ]
