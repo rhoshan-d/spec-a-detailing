@@ -10,21 +10,220 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col">
-                <div class="col-7 col-md-6 my-auto">
-                    <h1 class="display-4 logo-font text-black">
-                        Professional Mobile Car Valeting
-                    </h1>
-                    <h2 class="text-black">We come to you!</h2>
-                    <div class="my-5">
-                        <h4>
-                            <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Book Now</a>
-                        </h4>
+    <div class="container-fluid px-0">
+        <div class="hero-section position-relative">
+            <div class="overlay-dark"></div>
+            <div class="container position-relative">
+                <div class="row py-5">
+                    <div class="col-lg-6 py-5 text-center text-lg-left">
+                        <h1 class="display-4 logo-font text-white mb-4">
+                            Professional Mobile <br>Car Valeting
+                        </h1>
+                        <h2 class="text-white mb-4">We bring the car wash to you!</h2>
+                        <div class="my-5">
+                            <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3 mr-2 mb-3 mb-md-0">Book Now</a>
+                            <a href="#services" class="btn btn-outline-light btn-lg rounded-0 text-uppercase py-3">Our Services</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="logo-font mb-4">Why Choose Us?</h2>
+                <hr class="w-25 mx-auto mb-5">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="benefit-card p-4">
+                    <i class="fas fa-home fa-3x mb-3 text-primary"></i>
+                    <h3 class="h4 mb-3">We Come To You</h3>
+                    <p>No need to leave home or work. Our mobile valeting service comes directly to your location.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="benefit-card p-4">
+                    <i class="fas fa-clock fa-3x mb-3 text-primary"></i>
+                    <h3 class="h4 mb-3">Save Time</h3>
+                    <p>Carry on with your day while we transform your vehicle to showroom condition.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="benefit-card p-4">
+                    <i class="fas fa-leaf fa-3x mb-3 text-primary"></i>
+                    <h3 class="h4 mb-3">Eco-Friendly</h3>
+                    <p>We use environmentally friendly products that are safe for your car and the planet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="services" class="bg-light py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="logo-font mb-4">Our Services</h2>
+                    <hr class="w-25 mx-auto mb-5">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="service-image" style="background-image: url('{{ MEDIA_URL }}interior-cleaning.webp');"></div>
+                        <div class="card-body text-center">
+                            <h3 class="h5 card-title">Interior Cleaning</h3>
+                            <p class="card-text">Complete interior detailing including upholstery, dashboard, and trim.</p>
+                            <a href="{% url 'products' %}?category=interior_services" class="btn btn-outline-black">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="service-image" style="background-image: url('{{ MEDIA_URL }}exterior-cleaning.jpg');"></div>
+                        <div class="card-body text-center">
+                            <h3 class="h5 card-title">Exterior Valeting</h3>
+                            <p class="card-text">From quick washes to premium waxing and polishing treatments.</p>
+                            <a href="{% url 'products' %}?category=exterior_services" class="btn btn-outline-black">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="service-image" style="background-image: url('{{ MEDIA_URL }}ceramic-coating.webp');"></div>
+                        <div class="card-body text-center">
+                            <h3 class="h5 card-title">Ceramic Coating</h3>
+                            <p class="card-text">Long-lasting protection that keeps your car looking new for longer.</p>
+                            <a href="{% url 'products' %}?category=ceramic_coating" class="btn btn-outline-black">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <a href="{% url 'products' %}" class="btn btn-black btn-lg rounded-0 text-uppercase">View All Services</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="logo-font mb-4">Customer Reviews</h2>
+                <hr class="w-25 mx-auto mb-5">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="card-body">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="card-text">"Absolutely fantastic service! They came to my home and transformed my SUV. It looks better than when I bought it!"</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <p class="mb-0 font-weight-bold">John D. - Kildare</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="card-body">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="card-text">"The ceramic coating service is worth every penny. My car still repels water and dirt months later. Highly recommend!"</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <p class="mb-0 font-weight-bold">Mary S. - Dublin</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="card-body">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="card-text">"Professional team that arrived on time and did an incredible job on our company vehicles. Will be using regularly."</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <p class="mb-0 font-weight-bold">Corporate Fleet Manager - Wicklow</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid call-to-action-bg py-5">
+        <div class="overlay-gradient"></div>
+        <div class="container position-relative py-4">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="cta-content p-4 bg-white-transparent rounded shadow">
+                        <h2 class="logo-font mb-3">Ready for a Showroom Shine?</h2>
+                        <p class="lead mb-4">We bring professional car detailing to your doorstep. Choose from our range of services:</p>
+                        <div class="d-flex flex-wrap">
+                            <div class="cta-service-item mb-3 mr-3">
+                                <i class="fas fa-car-alt mr-2"></i> Exterior Valeting
+                            </div>
+                            <div class="cta-service-item mb-3 mr-3">
+                                <i class="fas fa-couch mr-2"></i> Interior Cleaning
+                            </div>
+                            <div class="cta-service-item mb-3 mr-3">
+                                <i class="fas fa-shield-alt mr-2"></i> Ceramic Coating
+                            </div>
+                        </div>
+                        <a href="{% url 'products' %}" class="btn btn-black btn-lg rounded-0 text-uppercase mt-3">Book Your Service</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="cta-image-container rounded shadow overflow-hidden">
+                        <div class="cta-before-after">
+                            <div class="before-image"></div>
+                            <div class="after-image"></div>
+                            <div class="slider-handle">
+                                <i class="fas fa-arrows-alt-h"></i>
+                            </div>
+                        </div>
+                        <div class="cta-labels">
+                            <span class="label-before">Before</span>
+                            <span class="label-after">After</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 {% endblock %}
