@@ -303,9 +303,21 @@ input[name='q']::placeholder {
 
 /* Call to action section styling */
 .call-to-action-bg {
-    background: url('{{ MEDIA_URL }}car-detail-bg.jpg') no-repeat center center;
-    background-size: cover;
     position: relative;
+    background-size: cover;
+}
+
+.call-to-action-bg::before {
+    content: "";
+    background: url('/media/car-detail-bg.webp') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    z-index: -1;
 }
 
 .overlay-gradient {

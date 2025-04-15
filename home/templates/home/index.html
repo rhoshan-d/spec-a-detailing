@@ -176,36 +176,31 @@
         <div class="overlay-gradient"></div>
         <div class="container position-relative py-4">
             <div class="row">
-                <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="col-12 col-lg-6 mb-4">
                     <div class="cta-content p-4 bg-white-transparent rounded shadow">
                         <h2 class="logo-font mb-3">Ready for a Showroom Shine?</h2>
-                        <p class="lead mb-4">We bring professional car detailing to your doorstep. Choose from our range of services:</p>
-                        <div class="d-flex flex-wrap">
-                            <div class="cta-service-item mb-3 mr-3">
-                                <i class="fas fa-car-alt mr-2"></i> Exterior Valeting
-                            </div>
-                            <div class="cta-service-item mb-3 mr-3">
-                                <i class="fas fa-couch mr-2"></i> Interior Cleaning
-                            </div>
-                            <div class="cta-service-item mb-3 mr-3">
-                                <i class="fas fa-shield-alt mr-2"></i> Ceramic Coating
-                            </div>
+                        <p class="lead mb-4">We bring professional car detailing to your doorstep.</p>
+                        
+                        <div class="text-center text-lg-left">
+                            <a href="{% url 'products' %}" class="btn btn-black btn-lg rounded-0 text-uppercase mt-3">Book Your Service</a>
                         </div>
-                        <a href="{% url 'products' %}" class="btn btn-black btn-lg rounded-0 text-uppercase mt-3">Book Your Service</a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="cta-image-container rounded shadow overflow-hidden">
-                        <div class="cta-before-after">
-                            <div class="before-image"></div>
-                            <div class="after-image"></div>
-                            <div class="slider-handle">
-                                <i class="fas fa-arrows-alt-h"></i>
+                
+                <div class="col-12 col-lg-6">
+                    <div class="d-none d-md-block">
+                        <div class="cta-image-container rounded shadow overflow-hidden">
+                            <div class="cta-before-after">
+                                <div class="before-image"></div>
+                                <div class="after-image"></div>
+                                <div class="slider-handle">
+                                    <i class="fas fa-arrows-alt-h"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="cta-labels">
-                            <span class="label-before">Before</span>
-                            <span class="label-after">After</span>
+                            <div class="cta-labels">
+                                <span class="label-before">Before</span>
+                                <span class="label-after">After</span>
+                            </div>
                         </div>
                     </div>
                 </div>
