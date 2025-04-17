@@ -415,6 +415,10 @@ input[name='q']::placeholder {
     font-weight: 500;
 }
 
+.about-page-content {
+    padding-top: 2rem;
+}
+
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
@@ -477,6 +481,18 @@ input[name='q']::placeholder {
     }
 }
 
+@media (max-width: 991px) {
+    .about-page-content {
+        margin-top: 60px;
+    }
+}
+
+@media (min-width: 992px) {
+    .about-page-content {
+        margin-top: 30px;
+    }
+}
+
 
 @media (max-width: 768px) {
     .hero-section {
@@ -490,5 +506,25 @@ input[name='q']::placeholder {
     
     .hero-section h2 {
         font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .fa-2x.fa-md-3x {
+        font-size: 2em;
+    }
+    
+    .about-page-content {
+        padding-top: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .w-md-75 {
+        width: 75% !important;
+    }
+    
+    .fa-2x.fa-md-3x {
+        font-size: 3em;
     }
 }

@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_meta %}
+    <meta name="description" content="Learn about Spec-A Detailing, Ireland's premier mobile car valeting and detailing service. We bring professional auto detailing to your doorstep.">
+    <meta name="keywords" content="car detailing company, mobile car valeting business, professional auto detailers, eco-friendly car cleaning, car valeting history, detailing experts, trusted car cleaners">
+{% endblock %}
+
+{% block extra_title %}About Us{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container about-page-content">
+        <div class="row d-none d-md-block">
+            <div class="col-12 text-center mt-5 pt-5 pt-md-4">
+                <h1 class="logo-font mb-4">About Spec-A Detailing</h1>
+                <hr class="w-50 mb-4">
+            </div>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-12 d-md-none text-center mb-4">
+                <h2 class="h3 logo-font">About Us</h2>
+                <hr class="w-50 mb-4">
+            </div>
+            
+            <div class="col-12 col-md-6 mb-4 mb-md-0">
+                <div class="d-none d-md-block">
+                    <img src="{{ MEDIA_URL }}about-us-team.png" alt="Spec-A Detailing Team" class="img-fluid rounded shadow">
+                </div>
+                
+                <div class="d-md-none">
+                    <div class="p-4 bg-light rounded shadow-sm text-center">
+                        <h3 class="h4 mb-3">About Our Team</h3>
+                        <p class="mb-0">Spec-A Detailing brings together experts passionate about car care. Our team provides professional valeting services across Kildare and surrounding areas.</p>
+                        <div class="mt-3">
+                            <i class="fas fa-users fa-3x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+                <h2 class="mb-3 mb-md-4">Our Story</h2>
+                <p>Founded in 2024, Spec-A Detailing was born out of a passion for immaculate vehicles and a desire to offer convenient, professional car care services across Ireland. What started as a small mobile operation has grown into one of Kildare's most trusted car valeting businesses.</p>
+                <p>Our team of experienced professionals are committed to the highest standards of auto detailing, using only the finest products and techniques to ensure your vehicle receives the care it deserves.</p>
+            </div>
+        </div>
+        
+        <div class="row my-4 my-md-5 py-3 py-md-4 bg-light rounded shadow-sm">
+            <div class="col-12 text-center">
+                <h2 class="mb-3 mb-md-4">Our Mission</h2>
+                <p class="mx-auto w-100 w-md-75 px-3 px-md-0">To provide exceptional mobile car valeting and detailing services that exceed our customers' expectations, while respecting their time and the environment.</p>
+            </div>
+        </div>
+        
+        <div class="row my-4 my-md-5">
+            <div class="col-12 text-center mb-3 mb-md-4">
+                <h2 class="mb-3 mb-md-4">Why Choose Spec-A Detailing?</h2>
+            </div>
+            
+            <div class="col-12 col-md-4 mb-4">
+                <div class="h-100 p-3 p-md-4 bg-white rounded shadow-sm">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-car fa-2x fa-md-3x text-primary"></i>
+                    </div>
+                    <h3 class="h5 text-center mb-3">Mobile Convenience</h3>
+                    <p>We come to your home or workplace, saving you valuable time and hassle. Our fully equipped mobile units bring the detailing shop to you.</p>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-4 mb-4">
+                <div class="h-100 p-3 p-md-4 bg-white rounded shadow-sm">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-award fa-2x fa-md-3x text-primary"></i>
+                    </div>
+                    <h3 class="h5 text-center mb-3">Professional Expertise</h3>
+                    <p>Our team is trained in the latest detailing techniques and technologies. We regularly update our skills to provide the best service possible.</p>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-4 mb-4">
+                <div class="h-100 p-3 p-md-4 bg-white rounded shadow-sm">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-leaf fa-2x fa-md-3x text-primary"></i>
+                    </div>
+                    <h3 class="h5 text-center mb-3">Eco-Friendly Approach</h3>
+                    <p>We're committed to using environmentally responsible products and practices, minimizing water usage and reducing our carbon footprint.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row my-4 my-md-5">
+            <div class="col-12 text-center mb-3 mb-md-4">
+                <h2 class="mb-3 mb-md-4">Meet Our Team</h2>
+            </div>
+            
+            <div class="col-12 col-md-4 mb-4">
+                <div class="text-center">
+                    <img src="{{ MEDIA_URL }}placeholder-avatar.webp" alt="Rhoshan - Operations Manager" class="img-fluid rounded-circle mb-3" style="width: 180px; height: 180px; object-fit: cover;">
+                    <h3 class="h5">Rhoshan</h3>
+                    <p class="text-muted">Operations Manager</p>
+                    <p>Rhoshan ensures every detail of our service runs smoothly, from appointment scheduling to customer satisfaction follow-ups.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 mb-4">
+                <div class="text-center">
+                    <img src="{{ MEDIA_URL }}placeholder-avatar.webp" alt="Anto - Founder & Lead Detailer" class="img-fluid rounded-circle mb-3" style="width: 180px; height: 180px; object-fit: cover;">
+                    <h3 class="h5">Anto</h3>
+                    <p class="text-muted">Founder & Lead Detailer</p>
+                    <p>With over 15 years of experience in the automotive industry, Anto founded Spec-A Detailing with a vision to revolutionize mobile car valeting in Ireland.</p>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-4 mb-4">
+                <div class="text-center">
+                    <img src="{{ MEDIA_URL }}placeholder-avatar.webp" alt="Jarek - Detailing Specialist" class="img-fluid rounded-circle mb-3" style="width: 180px; height: 180px; object-fit: cover;">
+                    <h3 class="h5">Jarek</h3>
+                    <p class="text-muted">Detailing Specialist</p>
+                    <p>Jarek specializes in premium services like ceramic coating and paint correction, bringing vehicles back to showroom condition. And is also a mechanic.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row my-4 my-md-5 py-3 py-md-4 bg-primary text-white rounded shadow">
+            <div class="col-12 text-center mb-3 mb-md-4">
+                <h2 class="mb-3 mb-md-4">What Our Customers Say</h2>
+            </div>
+            
+            <div class="col-12 col-md-10 col-lg-8 mx-auto">
+                <div class="text-center">
+                    <i class="fas fa-quote-left fa-2x fa-md-3x mb-3 opacity-50"></i>
+                    <p class="lead mb-4">"I've been using Spec-A Detailing for my entire fleet of company vehicles. Their service is impeccable, and the convenience of having them come to our office is invaluable. I wouldn't trust anyone else with our vehicles."</p>
+                    <p class="font-weight-bold mb-0">- Michael Reynolds, Fleet Manager</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row my-4 my-md-5">
+            <div class="col-12 text-center">
+                <h2 class="mb-3 mb-md-4">Ready to Experience the Spec-A Difference?</h2>
+                <p class="mb-3 mb-md-4">Book your mobile valeting service today and let us bring the car wash to you!</p>
+                <a href="{% url 'products' %}" class="btn btn-primary btn-lg px-4 px-md-5">Book Now</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
