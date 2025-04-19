@@ -448,6 +448,14 @@ input[name='q']::placeholder {
     font-size: 12px;
 }
 
+.review-text {
+    min-height: 80px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
@@ -471,6 +479,7 @@ input[name='q']::placeholder {
 
     body {
         height: calc(100vh - 116px);
+        padding-top: 116px;
     }
 
     .display-4.logo-font.text-black {

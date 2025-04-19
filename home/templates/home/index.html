@@ -115,61 +115,98 @@
             <div class="col-12">
                 <h2 class="logo-font mb-4">Customer Reviews</h2>
                 <hr class="w-25 mx-auto mb-5">
+                {% if request.user.is_superuser %}
+                    <p class="text-muted small">Staff view: You can manage reviews directly from this page</p>
+                {% endif %}
             </div>
         </div>
+        
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm p-3">
-                    <div class="card-body">
-                        <div class="text-warning mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+            {% for review in reviews %}
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="card h-100 border-0 shadow-sm p-3">
+                        {% if request.user.is_superuser %}
+                            <div class="admin-controls position-absolute" style="top: 10px; right: 10px; z-index: 10;">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="reviewActionDropdown{{ review.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="reviewActionDropdown{{ review.id }}">
+                                        <a class="dropdown-item text-danger" href="{% url 'delete_review' review.id %}" 
+                                           onclick="return confirm('Are you sure you want to remove this review? This action cannot be undone.');">
+                                            <i class="fas fa-trash-alt mr-2"></i> Remove Review
+                                        </a>
+                                        {% if not review.approved %}
+                                            <a class="dropdown-item text-success" href="{% url 'approve_review' review.id %}">
+                                                <i class="fas fa-check mr-2"></i> Approve Review
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if not review.approved %}
+                                <div class="pending-badge position-absolute" style="top: 10px; left: 10px;">
+                                    <span class="badge badge-warning">Pending Approval</span>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="text-warning mb-3">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= review.rating %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <p class="card-text review-text">{{ review.review_text|truncatechars:120 }}</p>
                         </div>
-                        <p class="card-text">"Absolutely fantastic service! They came to my home and transformed my SUV. It looks better than when I bought it!"</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <p class="mb-0 font-weight-bold">John D. - Kildare</p>
+                        <div class="card-footer bg-transparent border-0">
+                            <p class="mb-0 font-weight-bold">{{ review.name }} - {{ review.location }}</p>
+                            <p class="text-muted small mb-0">{{ review.created_date|date:"F d, Y" }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm p-3">
-                    <div class="card-body">
-                        <div class="text-warning mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="card-text">"The ceramic coating service is worth every penny. My car still repels water and dirt months later. Highly recommend!"</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <p class="mb-0 font-weight-bold">Mary S. - Dublin</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm p-3">
-                    <div class="card-body">
-                        <div class="text-warning mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="card-text">"Professional team that arrived on time and did an incredible job on our company vehicles. Will be using regularly."</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <p class="mb-0 font-weight-bold">Corporate Fleet Manager - Wicklow</p>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <div class="p-4 bg-light rounded shadow-sm">
+                        {% if request.user.is_authenticated %}
+                            <h4 class="mb-3">Be Our First Reviewer!</h4>
+                            <p class="mb-4">We don't have any customer reviews yet. As a registered user, you can be the first to share your experience with our services!</p>
+                            <a href="{% url 'add_review' %}" class="btn btn-primary">Write a Review</a>
+                        {% else %}
+                            <h4 class="mb-3">Customer Reviews</h4>
+                            <p class="mb-4">We're building our collection of customer experiences. Login or create an account to share your feedback about our services.</p>
+                            <div class="mt-3">
+                                <a href="{% url 'account_login' %}" class="btn btn-outline-primary mr-2">Login to Review</a>
+                                <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
+            {% endfor %}
+        </div>
+        
+        {% if reviews.count >= 4 %}
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="{% url 'all_reviews' %}" class="btn btn-outline-primary">
+                    <i class="fas fa-comments mr-2"></i> View All Reviews
+                </a>
             </div>
         </div>
+        {% endif %}
+        
+        {% if request.user.is_superuser and reviews %}
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <a href="{% url 'admin:home_customerreview_changelist' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-cogs mr-2"></i> Manage All Reviews in Admin Panel
+                    </a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     <div class="container-fluid call-to-action-bg py-5">

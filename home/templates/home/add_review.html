@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="logo-font mb-0">Write a Review</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'add_review' %}">
+                            {% csrf_token %}
+                            
+                            <div class="form-group mb-3">
+                                <label for="id_rating">Rating (1-5 stars)</label>
+                                <select name="rating" id="id_rating" class="form-control">
+                                    <option value="5">5 - Excellent</option>
+                                    <option value="4">4 - Very Good</option>
+                                    <option value="3">3 - Good</option>
+                                    <option value="2">2 - Fair</option>
+                                    <option value="1">1 - Poor</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="id_name">Your Name</label>
+                                {{ form.name }}
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="id_location">Your Location</label>
+                                {{ form.location }}
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="id_review_text">Your Review</label>
+                                <textarea name="review_text" id="id_review_text" rows="5" class="form-control"></textarea>
+                            </div>
+                            
+                            <div class="text-right">
+                                <a class="btn btn-outline-black rounded-0" href="{% url 'home' %}">Cancel</a>
+                                <button class="btn btn-black rounded-0" type="submit">Submit Review</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

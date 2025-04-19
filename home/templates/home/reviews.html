@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+        <div class="overlay"></div>
+        <div class="container">
+        <div class="row">
+            <div class="col-12 text-center pt-2 pt-sm-3 pt-md-4 pt-lg-5 pt-xl-0 my-5">
+                <h1 class="logo-font">Customer Reviews</h1>
+                <hr class="w-50 mx-auto">
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for review in reviews %}
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm p-3">
+                        {% if request.user.is_superuser %}
+                            <div class="admin-controls position-absolute" style="top: 10px; right: 10px; z-index: 10;">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="reviewActionDropdown{{ review.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="reviewActionDropdown{{ review.id }}">
+                                        <a class="dropdown-item text-danger" href="{% url 'delete_review' review.id %}" 
+                                           onclick="return confirm('Are you sure you want to remove this review? This action cannot be undone.');">
+                                            <i class="fas fa-trash-alt mr-2"></i> Remove Review
+                                        </a>
+                                        {% if not review.approved %}
+                                            <a class="dropdown-item text-success" href="{% url 'approve_review' review.id %}">
+                                                <i class="fas fa-check mr-2"></i> Approve Review
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if not review.approved %}
+                                <div class="pending-badge position-absolute" style="top: 10px; left: 10px;">
+                                    <span class="badge badge-warning">Pending Approval</span>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="text-warning mb-3">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= review.rating %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <p class="card-text">{{ review.review_text }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <p class="mb-0 font-weight-bold">{{ review.name }} - {{ review.location }}</p>
+                            <p class="text-muted small mb-0">{{ review.created_date|date:"F d, Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="p-5 bg-light rounded text-center">
+                        <h3>No Reviews Yet</h3>
+                        <p class="mb-4">Be the first to share your experience with our services!</p>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'add_review' %}" class="btn btn-primary">Write a Review</a>
+                        {% else %}
+                            <a href="{% url 'account_login' %}" class="btn btn-outline-primary">Login to Write a Review</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="row my-5">
+            <div class="col-12 text-center">
+                <a href="{% url 'home' %}" class="btn btn-outline-black">
+                    <i class="fas fa-chevron-left mr-2"></i> Back to Home
+                </a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'add_review' %}" class="btn btn-primary ml-2">
+                        <i class="fas fa-pen mr-2"></i> Write a Review
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
