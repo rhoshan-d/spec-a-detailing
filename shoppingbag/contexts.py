@@ -4,11 +4,26 @@ from django.shortcuts import get_object_or_404
 from products.models import Product
 
 def bag_contents(request):
+    """
+    A context processor to make bag contents
+    available across all templates
+    """
 
+    if not hasattr(request, 'session'):
+        return {
+            'bag_items': [],
+            'total': 0,
+            'product_count': 0,
+            'delivery': 0,
+            'free_delivery_delta': 0,
+            'free_delivery_threshold': 0,
+            'grand_total': 0,
+        }
+
+    bag = request.session.get('bag', {})
     bag_items = []
     total = 0
     product_count = 0
-    bag = request.session.get('bag', {})
 
     for item_id, item_data in bag.items():
 
@@ -21,7 +36,7 @@ def bag_contents(request):
                 'quantity': item_data,
                 'product': product,
             })
-            
+
         else:
             product = get_object_or_404(Product, pk=item_id)
             for size, quantity in item_data['items_by_size'].items():
@@ -42,7 +57,7 @@ def bag_contents(request):
         free_delivery_delta = 0
     
     grand_total = delivery + total
-    
+
     context = {
         'bag_items': bag_items,
         'total': total,
