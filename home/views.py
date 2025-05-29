@@ -4,16 +4,15 @@ from django.contrib.auth.decorators import login_required
 from .models import CustomerReview
 from .forms import CustomerReviewForm
 from checkout.models import Order
-from django.db.models import Q
 
 def index(request):
     """A view to return the index page with reviews"""
     if request.user.is_superuser:
         reviews = CustomerReview.objects.all().order_by('-created_date')[:8]
     elif request.user.is_authenticated:
-        reviews = CustomerReview.objects.filter(
-            Q(approved=True) | Q(user=request.user, approved=False)
-        ).distinct().order_by('-created_date')[:4]
+        approved_reviews = CustomerReview.objects.filter(approved=True).order_by('-created_date')
+        user_reviews = CustomerReview.objects.filter(user=request.user, approved=False).order_by('-created_date')
+        reviews = (approved_reviews | user_reviews).distinct().order_by('-created_date')[:4]
     else:
         reviews = CustomerReview.objects.filter(approved=True).order_by('-created_date')[:4]
     
@@ -113,9 +112,9 @@ def all_reviews(request):
     if request.user.is_superuser:
         reviews = CustomerReview.objects.all().order_by('-created_date')
     elif request.user.is_authenticated:
-        reviews = CustomerReview.objects.filter(
-            Q(approved=True) | Q(user=request.user, approved=False)
-        ).distinct().order_by('-created_date')
+        approved_reviews = CustomerReview.objects.filter(approved=True).order_by('-created_date')
+        user_reviews = CustomerReview.objects.filter(user=request.user, approved=False).order_by('-created_date')
+        reviews = (approved_reviews | user_reviews).distinct().order_by('-created_date')
     else:
         reviews = CustomerReview.objects.filter(approved=True).order_by('-created_date')
     

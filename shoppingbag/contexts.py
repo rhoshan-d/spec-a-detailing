@@ -3,27 +3,13 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from products.models import Product
 
+
 def bag_contents(request):
-    """
-    A context processor to make bag contents
-    available across all templates
-    """
 
-    if not hasattr(request, 'session'):
-        return {
-            'bag_items': [],
-            'total': 0,
-            'product_count': 0,
-            'delivery': 0,
-            'free_delivery_delta': 0,
-            'free_delivery_threshold': 0,
-            'grand_total': 0,
-        }
-
-    bag = request.session.get('bag', {})
     bag_items = []
     total = 0
     product_count = 0
+    bag = request.session.get('bag', {})
 
     for item_id, item_data in bag.items():
 
@@ -55,7 +41,7 @@ def bag_contents(request):
     else:
         delivery = 0
         free_delivery_delta = 0
-    
+
     grand_total = delivery + total
 
     context = {
@@ -65,7 +51,6 @@ def bag_contents(request):
         'delivery': delivery,
         'free_delivery_delta': free_delivery_delta,
         'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
-        'discount_threshold' : settings.DISCOUNT_THRESHOLD,
         'grand_total': grand_total,
     }
 
