@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 if os.path.isfile('env.py'):
     import env
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,7 +93,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'shoppingbag.contexts.bag_contents',
-                'about.contexts.site_info',
+                # 'about.contexts.site_info',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
