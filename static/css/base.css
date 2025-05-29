@@ -38,7 +38,7 @@ body {
 
 .btn-outline-black {
     background: white;
-    color: black !important; /* use important to override link colors for <a> elements */
+    color: black !important;
     border: 1px solid black;
 }
 
@@ -473,9 +473,9 @@ input[name='q']::placeholder {
 
 /* pad the top a bit when navbar is collapsed on mobile */
 @media (max-width: 991px) {
-    .header-container {
+    /* .header-container {
         padding-top: 116px;
-    }
+    } */
 
     body {
         height: calc(100vh - 116px);
