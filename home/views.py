@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import CustomerReview
 from .forms import CustomerReviewForm
 from checkout.models import Order
+from django.conf import settings
 
 def index(request):
     """A view to return the index page with reviews"""
@@ -18,6 +19,7 @@ def index(request):
     
     context = {
         'reviews': reviews,
+        'DISCOUNT_THRESHOLD': settings.DISCOUNT_THRESHOLD,
     }
     
     return render(request, 'home/index.html', context)
