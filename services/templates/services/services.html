@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .border-dashed {
+        border: 2px dashed #dee2e6;
+        border-radius: 0.25rem;
+    }
+</style>
+{% endblock %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 class="logo-font">Our Services</h2>
+            <hr class="w-50 mb-1">
+        </div>
+    </div>
+    
+    {% if services %}
+        <div class="row">
+            {% for service in services %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center shadow-sm">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.name }}">
+                    {% else %}
+                        <img src="{{ MEDIA_URL }}placeholder.webp" class="card-img-top" alt="{{ service.name }} placeholder image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="h4">{{ service.name }}</h3>
+                        <p>{{ service.description|truncatewords:30 }}</p>
+                        {% if service.price %}
+                            <p class="font-weight-bold">Starting from €{{ service.price }}</p>
+                        {% endif %}
+                        {% if service.duration %}
+                            <p><i class="far fa-clock mr-1"></i> {{ service.duration }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        {% if request.user.is_superuser %}
+                            <a href="{% url 'admin:services_service_change' service.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <p class="lead">No services have been added yet.</p>
+                
+                {% if request.user.is_superuser %}
+                    <div class="card border-dashed p-4 mt-4 mb-4">
+                        <h3 class="h4 mb-3">Add Your First Service</h3>
+                        <p>As an administrator, you can add services that will appear here.</p>
+                        <a href="{% url 'admin:services_service_add' %}" class="btn btn-primary">
+                            <i class="fas fa-plus mr-2"></i>Add New Service
+                        </a>
+                        
+                        <div class="mt-4 text-muted">
+                            <p class="small mb-1">Popular car valeting services include:</p>
+                            <ul class="text-left small">
+                                <li>Basic Exterior Wash</li>
+                                <li>Full Interior Valet</li>
+                                <li>Complete Detail Package</li>
+                                <li>Ceramic Coating Application</li>
+                                <li>Engine Bay Cleaning</li>
+                                <li>Paint Protection</li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    
+    {% if request.user.is_superuser and services %}
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="{% url 'admin:services_service_add' %}" class="btn btn-outline-primary">
+                    <i class="fas fa-plus mr-2"></i>Add New Service
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
