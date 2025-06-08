@@ -27,17 +27,19 @@
             <hr class="w-50 mb-1">
         </div>
     </div>
-    
+
     {% if services %}
         <div class="row">
             {% for service in services %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100 text-center shadow-sm">
-                    {% if service.image %}
-                        <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.name }}">
-                    {% else %}
-                        <img src="{{ MEDIA_URL }}placeholder.webp" class="card-img-top" alt="{{ service.name }} placeholder image">
-                    {% endif %}
+                    <a href="{% url 'service_detail' service.id %}" class="text-decoration-none text-dark">
+                        {% if service.image %}
+                            <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.name }}">
+                        {% else %}
+                            <img src="{{ MEDIA_URL }}placeholder.webp" class="card-img-top" alt="{{ service.name }} placeholder image">
+                        {% endif %}
+                    </a>
                     <div class="card-body">
                         <h3 class="h4">{{ service.name }}</h3>
                         <p>{{ service.description|truncatewords:30 }}</p>
@@ -49,8 +51,11 @@
                         {% endif %}
                     </div>
                     <div class="card-footer bg-white border-0">
+                        <a href="{% url 'service_detail' service.id %}" class="btn btn-primary">
+                            <i class="fas fa-info-circle mr-1"></i>View Details
+                        </a>
                         {% if request.user.is_superuser %}
-                            <a href="{% url 'admin:services_service_change' service.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="{% url 'admin:services_service_change' service.id %}" class="btn btn-sm btn-outline-secondary ml-2">Edit</a>
                         {% endif %}
                     </div>
                 </div>
@@ -61,7 +66,7 @@
         <div class="row">
             <div class="col-12 text-center mb-5">
                 <p class="lead">No services have been added yet.</p>
-                
+
                 {% if request.user.is_superuser %}
                     <div class="card border-dashed p-4 mt-4 mb-4">
                         <h3 class="h4 mb-3">Add Your First Service</h3>
@@ -69,7 +74,7 @@
                         <a href="{% url 'admin:services_service_add' %}" class="btn btn-primary">
                             <i class="fas fa-plus mr-2"></i>Add New Service
                         </a>
-                        
+
                         <div class="mt-4 text-muted">
                             <p class="small mb-1">Popular car valeting services include:</p>
                             <ul class="text-left small">
@@ -86,7 +91,7 @@
             </div>
         </div>
     {% endif %}
-    
+
     {% if request.user.is_superuser and services %}
         <div class="row mt-4">
             <div class="col-12 text-center">

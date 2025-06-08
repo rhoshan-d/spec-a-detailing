@@ -1,0 +1,41 @@
+.datepicker table tr td.disabled,
+.datepicker table tr td.disabled:hover {
+    color: #ccc;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.time-slot {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.time-slot.selected {
+    border-color: #007bff;
+    background-color: #e7f1ff;
+}
+
+.time-slot.unavailable {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+}
+
+.datepicker-days .unavailable {
+    background-color: #f8f9fa;
+    color: #ccc;
+}
+
+.service-image {
+    height: 300px;
+    object-fit: cover;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}

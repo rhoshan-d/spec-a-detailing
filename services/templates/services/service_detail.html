@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'services/css/booking.css' %}">
+{% endblock %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <a href="{% url 'services' %}" class="text-muted">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Services
+            </a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            {% if service.image %}
+            <img src="{{ service.image.url }}" alt="{{ service.name }}" class="img-fluid rounded shadow-sm service-image">
+            {% else %}
+            <div class="bg-light d-flex align-items-center justify-content-center rounded shadow-sm service-image">
+                <i class="fas fa-car-wash fa-5x text-muted"></i>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-6">
+            <h1 class="h2 mb-3">{{ service.name }}</h1>
+            
+            {% if service.price %}
+                <p class="h4 text-primary mb-3">Starting from €{{ service.price }}</p>
+            {% endif %}
+            
+            <div class="mb-4">
+                {{ service.description|linebreaks }}
+            </div>
+            
+            {% if service.duration %}
+                <p><i class="far fa-clock mr-2"></i> {{ service.duration }}</p>
+            {% endif %}
+            
+            <div class="mt-4">
+                <a href="{% url 'book_service' service.id %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calendar-check mr-2"></i>Book Now !
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-12">
+            <h2 class="mb-4">What's Included</h2>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="h5">Professional Equipment</h3>
+                <p>We bring all professional equipment needed for your service</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3 class="h5">Convenient Scheduling</h3>
+                <p>Book the time that works for you - we come to you</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3 class="h5">Satisfaction Guaranteed</h3>
+                <p>We ensure 100% satisfaction with our services</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

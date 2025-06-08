@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="{% static 'services/css/booking.css' %}">
+{% endblock %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <a href="{% url 'service_detail' service.id %}" class="text-muted">
+                <i class="fas fa-arrow-left mr-2"></i>Back to {{ service.name }}
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h1 class="h2">Book Your {{ service.name }}</h1>
+            <p class="lead">Select your preferred date and time, and we'll come to you!</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <form method="post" id="booking-form">
+                        {% csrf_token %}
+                        <input type="hidden" id="service-id" value="{{ service.id }}">
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <h3 class="h5 mb-3">Select a Date</h3>
+                                <div id="booking-datepicker"></div>
+                                {{ form.booking_date.errors }}
+                                {{ form.booking_date }}
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <h3 class="h5 mb-3">Select a Time Slot</h3>
+                                <div id="time-slots">
+                                    <div class="time-slot" data-value="morning">
+                                        <h4 class="h6 mb-1">Morning</h4>
+                                        <p class="mb-0 small">8:00 AM - 12:00 PM</p>
+                                    </div>
+                                    <div class="time-slot" data-value="afternoon">
+                                        <h4 class="h6 mb-1">Afternoon</h4>
+                                        <p class="mb-0 small">1:00 PM - 5:00 PM</p>
+                                    </div>
+                                </div>
+                                {{ form.time_slot.errors }}
+                                {{ form.time_slot }}
+                            </div>
+                        </div>
+                        
+                        <h3 class="h5 mb-3">Service Location</h3>
+                        <div class="form-group">
+                            <label for="{{ form.address.id_for_label }}">Where should we meet you?</label>
+                            {{ form.address }}
+                            {{ form.address.errors }}
+                            <small class="form-text text-muted">Please provide the full address where you would like us to perform the service.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.special_instructions.id_for_label }}">Special Instructions (Optional)</label>
+                            {{ form.special_instructions }}
+                            {{ form.special_instructions.errors }}
+                            <small class="form-text text-muted">Any specific requirements or information we should know?</small>
+                        </div>
+                        
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary btn-block py-2">
+                                <i class="fas fa-calendar-check mr-2"></i>Confirm Booking
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <h4 class="h5 mb-3">Booking Information:</h4>
+                <ul>
+                    <li>Bookings must be made at least 24 hours in advance.</li>
+                    <li>You can cancel your booking up to 24 hours before the scheduled time.</li>
+                    <li>Our team will contact you to confirm your appointment.</li>
+                    <li>For same-day emergency services, please call us directly.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="{% static 'services/js/booking.js' %}"></script>
+{% endblock %}

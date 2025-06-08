@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
+import datetime
+
 
 class Service(models.Model):
     name = models.CharField(max_length=255)
@@ -19,3 +23,50 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Booking(models.Model):
+    """
+    Represents a booking made by a user for a specific service.
+    Each booking is associated with a user, a service, a booking date, a time slot,
+    an address, and optional special instructions.
+    The booking status can be pending, confirmed, completed, or cancelled.
+    """
+    BOOKING_STATUS = (
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+    )
+    
+    TIME_SLOTS = (
+        ('morning', '8:00 AM - 12:00 PM'),
+        ('afternoon', '1:00 PM - 5:00 PM'),
+    )
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings')
+    service = models.ForeignKey('Service', on_delete=models.CASCADE, related_name='bookings')
+    booking_date = models.DateField()
+    time_slot = models.CharField(max_length=20, choices=TIME_SLOTS)
+    address = models.TextField(help_text="Where should we meet you?")
+    special_instructions = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=20, choices=BOOKING_STATUS, default='pending')
+    
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['booking_date', 'time_slot']
+        unique_together = ['booking_date', 'time_slot']
+        
+    def __str__(self):
+        return f"{self.service.name} on {self.booking_date} ({self.get_time_slot_display()})"
+        
+    def is_past_booking(self):
+        return self.booking_date < timezone.now().date()
+        
+    def can_cancel(self):
+        booking_datetime = timezone.make_aware(
+            datetime.datetime.combine(self.booking_date, datetime.time(0, 0))
+        )
+        return timezone.now() < (booking_datetime - datetime.timedelta(days=1))
