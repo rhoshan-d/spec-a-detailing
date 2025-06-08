@@ -5,6 +5,7 @@ from .models import UserProfile
 from .forms import UserProfileForm
 
 from checkout.models import Order
+from services.models import Booking
 
 def profile(request):
     """ Display the user's profile. """
@@ -19,12 +20,15 @@ def profile(request):
             messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
+    
     orders = profile.orders.all()
+    bookings = Booking.objects.filter(user=request.user).order_by('booking_date')
 
     template = 'profiles/profile.html'
     context = {
         'form': form,
         'orders': orders,
+        'bookings': bookings,
         'on_profile_page': True
     }
 
