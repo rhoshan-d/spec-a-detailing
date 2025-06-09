@@ -195,6 +195,34 @@ The project utilizes a PostgreSQL relational database with the following primary
 - Expiry management
 - Redemption system
 
+## Database Design
+
+### Entity Relationship Diagram (ERD)
+
+The database schema for Spec-A Detailing has been designed to support all core business functionality including user management, product catalog, ordering, gift card processing, and customer reviews. Below is the Entity Relationship Diagram showing how different models relate to each other:
+
+![Entity Relationship Diagram](documentation/project_images/spec_a_erd.png)
+
+### Database Relationships Explained
+
+The diagram illustrates several key relationships:
+
+1. **User and UserProfile**: One-to-one relationship. Each registered user has exactly one user profile that stores their default delivery information and order history.
+
+2. **Product and Category**: Many-to-one relationship. Each product belongs to one category, while categories can have multiple products.
+
+3. **Order and OrderLineItem**: One-to-many relationship. Each order can contain multiple line items, representing individual products purchased.
+
+4. **UserProfile and Order**: One-to-many relationship. A user profile can be associated with multiple orders over time.
+
+5. **Product and Review**: One-to-many relationship. Products can receive multiple reviews from different users.
+
+6. **User and Review**: One-to-many relationship. Users can submit multiple reviews for different products.
+
+7. **Order and GiftCard**: One-to-many relationship. An order can generate multiple gift cards when gift vouchers are purchased.
+
+This database architecture ensures data integrity while providing the necessary flexibility to support all core business operations and future feature development.
+
 ## Technologies Used
 
 ### Languages
