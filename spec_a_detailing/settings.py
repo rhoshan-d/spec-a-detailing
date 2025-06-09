@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     'localhost',  # vscode preview
     '127.0.0.1',  # listen for stripe webhooks
     'spec-a-detailing-33916ed689f8.herokuapp.com',  # heroku
+    'ui.dev',  # heroku
 ]
 
 
