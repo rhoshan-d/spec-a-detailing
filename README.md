@@ -8,7 +8,7 @@ Spec-A Detailing provides premium mobile car valeting services across Kildare an
 
 [View the live site on Heroku](https://spec-a-detailing-33916ed689f8.herokuapp.com/)
 
-![Responsive Mockup](documentation/images/responsive-mockup.png)
+![Responsive Mockup](documentation/project_images/responsive-mockup.png)
 
 ## Table of Contents
 
@@ -64,6 +64,19 @@ The website features a professional and user-friendly design that emphasizes tru
 - **Imagery**: High-quality before/after images showcase the transformation of vehicles after our services. Professional photos of team members and detailing processes help build customer trust.
 
 - **Layout**: Responsive design with intuitive navigation prioritizes service discovery and easy checkout. Clear call-to-action buttons guide users through the purchasing process.
+
+### Wireframes
+
+During the planning phase, wireframes were created to establish the layout and user interface design. These wireframes served as a blueprint for development and helped visualize the user experience across different sections of the site.
+
+#### Homepage Wireframe
+
+The homepage wireframe illustrates the key layout elements including the header navigation, hero section, service categories, and footer information:
+
+![Homepage Wireframe](documentation/project_images/spec_a_homepage_wireframe.png)
+
+*The homepage design emphasizes clear navigation, prominent call-to-action elements, and visual hierarchy to guide users toward service discovery and booking options.*
+
 
 ## Features
 
@@ -332,31 +345,6 @@ To run this project locally:
    ```
 7. Run the server: `python manage.py runserver`
 
-## Credits
-
-### Code
-- **Django Documentation**: Framework implementation guidance
-- **Bootstrap Documentation**: Component design and responsive layout techniques
-- **Code Institute**: Project structure and deployment workflow guidance
-- **Stripe Documentation**: Payment processing implementation
-
-### Content
-- Professional service descriptions crafted for the Irish market
-- Customer review system based on best e-commerce practices
-- About section content highlighting team expertise
-
-### Media
-- Service images sourced from professional detailing resources
-- Logo design by project owner
-- Icons from Font Awesome library
-- Placeholder images for team members and services
-
-### Acknowledgements
-- **Code Institute**: For education resources and project support
-- **Mentor Support**: For guidance throughout the development process
-- **Peer Reviews**: For testing and valuable feedback
-- **Family and Friends**: For user testing and constructive feedback
-
 ## Business Plan
 
 ### Executive Summary
@@ -461,3 +449,28 @@ To run this project locally:
 - Water conservation techniques and recycling systems
 - Waste reduction practices and proper disposal methods
 - Carbon footprint reduction through efficient route planning
+
+## Credits
+
+### Code
+- **Django Documentation**: Framework implementation guidance
+- **Bootstrap Documentation**: Component design and responsive layout techniques
+- **Code Institute**: Project structure and deployment workflow guidance
+- **Stripe Documentation**: Payment processing implementation
+
+### Content
+- Professional service descriptions crafted for the Irish market
+- Customer review system based on best e-commerce practices
+- About section content highlighting team expertise
+
+### Media
+- Service images sourced from professional detailing resources
+- Logo design by project owner
+- Icons from Font Awesome library
+- Placeholder images for team members and services
+
+### Acknowledgements
+- **Code Institute**: For education resources and project support
+- **Mentor Support**: For guidance throughout the development process
+- **Peer Reviews**: For testing and valuable feedback
+- **Family and Friends**: For user testing and constructive feedback
