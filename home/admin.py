@@ -3,6 +3,7 @@ from .models import CustomerReview
 
 # Register your models here.
 
+
 class CustomerReviewAdmin(admin.ModelAdmin):
     list_display = ('name', 'rating', 'location', 'created_date', 'approved')
     list_filter = ('approved', 'rating', 'created_date')
@@ -12,5 +13,6 @@ class CustomerReviewAdmin(admin.ModelAdmin):
     def approve_reviews(self, request, queryset):
         queryset.update(approved=True)
     approve_reviews.short_description = "Approve selected reviews"
+
 
 admin.site.register(CustomerReview, CustomerReviewAdmin)
