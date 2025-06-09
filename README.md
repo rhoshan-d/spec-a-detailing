@@ -25,6 +25,7 @@ Spec-A Detailing provides premium mobile car valeting services across Kildare an
 - Testing
 - Deployment
 - Credits
+- Business Plan
 
 ## Introduction
 
@@ -327,3 +328,108 @@ To run this project locally:
 - **Mentor Support**: For guidance throughout the development process
 - **Peer Reviews**: For testing and valuable feedback
 - **Family and Friends**: For user testing and constructive feedback
+
+## Business Plan
+
+### Executive Summary
+
+**Business Name:** Spec-A Detailing
+
+**Business Model:** Mobile car valeting and auto detailing services with online booking and e-commerce platform
+
+**Location:** Based in Kildare, Ireland with mobile service across surrounding counties
+
+**Mission Statement:** To deliver premium car care services directly to customers' locations, providing convenience without compromising on quality.
+
+**Vision:** To become the leading mobile car detailing service in Ireland, recognized for exceptional service quality, eco-friendly practices, and customer convenience.
+
+### Business Objectives
+
+- Establish a fully functional e-commerce and booking website within 3 months
+- Acquire 200 regular customers within the first year
+- Build partnerships with at least 5 corporate clients for fleet servicing
+- Achieve break-even within 12 months of operation
+- Generate positive customer reviews with an average rating of 4.7/5
+
+### Products & Services
+
+**Car Valeting Services:**
+- Interior Cleaning & Detailing
+- Exterior Wash & Wax
+- Full Vehicle Detailing
+- Engine Bay Cleaning
+- Headlight Restoration
+- Odor Removal
+
+**Premium Services:**
+- Ceramic Coating Application
+- Paint Protection Film Installation
+- Leather Conditioning & Protection
+- Scratch & Swirl Mark Removal
+- Vinyl Wrap Care
+
+**Additional Offerings:**
+- Gift Vouchers
+- Corporate Fleet Packages
+- Vehicle Maintenance Plans
+- Mobile Service (We come to you)
+- Vehicle Collection & Return Service (by arrangement)
+
+### Market Analysis
+
+**Target Audience:**
+- Working professionals with limited time
+- Luxury and sports car owners
+- Corporate businesses with vehicle fleets
+- Car enthusiasts and collectors
+- New vehicle owners seeking protection packages
+
+**Market Trends:**
+- Growing demand for mobile services that save time
+- Increasing interest in long-term vehicle protection (ceramic coatings, PPF)
+- Rising awareness of eco-friendly cleaning products
+- Higher expectations for professional service quality
+
+**Competitive Advantage:**
+- Premium mobile service that comes to the customer
+- Highly trained specialists using professional-grade products
+- Time-efficient booking and service process
+- Transparent pricing with online payment options
+- Eco-friendly products and water conservation techniques
+
+### Marketing Strategy
+
+**Channels:**
+- SEO-optimized website with before/after galleries
+- Social media content featuring transformational results
+- Email marketing with seasonal promotions
+- Local partnerships with car dealerships
+- Google Ads targeting car-related searches
+
+**Promotions:**
+- New customer discount
+- Referral program with rewards
+- Seasonal detailing packages
+- Loyalty program with progressive discounts
+- Corporate fleet service trial offers
+
+### Operations Plan
+
+**Platform Development:**
+- Django-based e-commerce website with secure payment processing
+- Booking system with location, service, and time selection
+- Customer account area for service history and preferences
+
+**Service Delivery:**
+- Fully equipped mobile detailing vans
+- Professional equipment for waterless washing where appropriate
+- Quality control checklists for each service
+- Photo documentation of before/after results
+
+### Sustainability Focus
+
+**Environmental Commitment:**
+- Eco-friendly, biodegradable cleaning products
+- Water conservation techniques and recycling systems
+- Waste reduction practices and proper disposal methods
+- Carbon footprint reduction through efficient route planning
