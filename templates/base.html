@@ -54,7 +54,7 @@
                     <div class="col-md-4 text-right">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item">
-                                <a href="{{ contact_info.social_links.facebook|default:'#' }}" class="text-white social-link" aria-label="Facebook">
+                                <a href="{{ contact_info.social_links.facebook|default:'https://www.facebook.com/autodetailing' }}" class="text-white social-link" aria-label="Facebook page (opens in a new tab)" target="_blank" rel="noopener noreferrer">
                                     <span class="social-icon-wrapper">
                                         <i class="fab fa-facebook-f"></i>
                                     </span>
@@ -216,7 +216,7 @@
                     </div>
                     <p class="mb-3">Mobile valeting services that come to you across Ireland.</p>
                     <div class="mt-3">
-                        <a href="{{ contact_info.social_links.facebook|default:'#' }}" class="btn btn-outline-light btn-sm" aria-label="Facebook">
+                        <a href="{{ contact_info.social_links.facebook|default:'https://www.facebook.com/autodetailing' }}" class="btn btn-outline-light btn-sm" aria-label="Facebook page for Spec-A Detailing (opens in a new tab)" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-facebook-f mr-2"></i> Follow Us on Facebook
                         </a>
                     </div>
@@ -231,6 +231,7 @@
                         <li><a href="#" class="text-white">At Home Paint Protection</a></li>
                         <li><a href="#" class="text-white">On Site Corporate Fleet Cleaning</a></li>
                         <li><a href="#" class="text-white">Gift Vouchers</a></li>
+                        <li><a href="https://www.professionalvaleting.ie/how-mobile-valeting-works" class="text-white" target="_blank" rel="noopener noreferrer" aria-label="Learn about mobile valeting processes (opens in new tab)">How Mobile Valeting Works</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-4">
@@ -260,6 +261,28 @@
             <div class="row">
                 <div class="col text-center py-3 border-top mt-3">
                     <p class="mb-0">&copy; {% now "Y" %} Spec-A Detailing | Professional Car Valeting & Auto Detailing Services. All Rights Reserved.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <h6 class="mb-2">Helpful Resources</h6>
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="https://www.autoexpress.co.uk/car-care/90475/complete-guide-to-car-valeting" class="text-white" target="_blank" rel="noopener noreferrer" aria-label="Car valeting guide from Auto Express (opens in new tab)">
+                                <i class="fas fa-external-link-alt mr-1"></i> Car Valeting Guide
+                            </a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="https://www.detailingwiki.org" class="text-white" target="_blank" rel="noopener noreferrer" aria-label="Detailing Wiki resource (opens in new tab)">
+                                <i class="fas fa-external-link-alt mr-1"></i> Detailing Wiki
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.rsa.ie/road-safety/road-users/drivers/caring-for-your-vehicle" class="text-white" target="_blank" rel="noopener noreferrer" aria-label="Road Safety Authority vehicle care info (opens in new tab)">
+                                <i class="fas fa-external-link-alt mr-1"></i> Vehicle Care Tips
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
