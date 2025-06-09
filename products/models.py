@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -27,6 +28,29 @@ class Product(models.Model):
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    is_gift_voucher = models.BooleanField(default=False)
+    validity_period = models.IntegerField(
+        null=True, 
+        blank=True, 
+        help_text="Validity period in months (for gift cards only)"
+    )
 
     def __str__(self):
         return self.name
+
+
+class GiftCard(models.Model):
+    code = models.CharField(max_length=10, unique=True)
+    original_value = models.DecimalField(max_digits=6, decimal_places=2)
+    remaining_value = models.DecimalField(max_digits=6, decimal_places=2)
+    expiry_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    order = models.ForeignKey('checkout.Order', null=True, on_delete=models.SET_NULL)
+    email = models.EmailField()
+    is_active = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return f"Gift Card {self.code} - €{self.remaining_value}"
+    
+    def is_expired(self):
+        return timezone.now() > self.expiry_date

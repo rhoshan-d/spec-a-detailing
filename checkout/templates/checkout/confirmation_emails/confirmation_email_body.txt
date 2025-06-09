@@ -9,6 +9,16 @@ Order Total: ${{ order.order_total }}
 Delivery: ${{ order.delivery_cost }}
 Grand Total: ${{ order.grand_total }}
 
+{% if gift_cards %}
+----- YOUR GIFT CARDS -----
+{% for gift_card in gift_cards %}
+€{{ gift_card.original_value }} Gift Card 
+Code: {{ gift_card.code }}
+Valid until: {{ gift_card.expiry_date|date:"F j, Y" }}
+{% endfor %}
+--------------------------
+{% endif %}
+
 Your order will be shipped to {{ order.street_address1 }} in {{ order.town_or_city }}, {{ order.country }}.
 
 We've got your phone number on file as {{ order.phone_number }}.

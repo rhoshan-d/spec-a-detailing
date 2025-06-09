@@ -195,6 +195,41 @@
                 </div>
             </div>
         </div>
+        {% if gift_cards %}
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="text-black">Your Gift Cards</h3>
+                <div class="alert alert-info">
+                    <p><i class="fas fa-info-circle mr-2"></i> These codes have been sent to your email, but please save them now for your records.</p>
+                </div>
+                
+                <div class="row">
+                    {% for gift_card in gift_cards %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="my-0">€{{ gift_card.original_value }} Gift Card</h4>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Your Gift Card Code</h5>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" value="{{ gift_card.code }}" readonly>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary copy-btn" type="button" data-clipboard-text="{{ gift_card.code }}">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="card-text">Valid until: {{ gift_card.expiry_date|date:"F j, Y" }}</p>
+                                <p class="small text-muted mb-0">This gift card can be redeemed during checkout.</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
         <div class="row">
 			<div class="col-12 col-lg-7 text-right">
 				{% if from_profile %}
@@ -215,4 +250,23 @@
 			</div>
 		</div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+    <script>
+        var clipboard = new ClipboardJS('.copy-btn');
+        
+        clipboard.on('success', function(e) {
+            const btn = e.trigger;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+            }, 1500);
+            
+            e.clearSelection();
+        });
+    </script>
 {% endblock %}

@@ -1,0 +1,21 @@
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea;">
+    <img src="{{ site_url }}{{ MEDIA_URL }}logo.jpg" alt="Spec-A Detailing Logo" style="max-width: 200px;">
+    <h1 style="color: #333;">Your Gift Card</h1>
+    <p>Hello {{ order.full_name }},</p>
+    <p>Thank you for purchasing a gift card from Spec-A Detailing!</p>
+    
+    <div style="background-color: #f8f8f8; border: 2px dashed #ccc; padding: 20px; margin: 20px 0;">
+        <h2 style="color: #007bff; margin: 0;">€{{ gift_card.original_value }}</h2>
+        <p style="font-size: 18px; margin: 10px 0;">Gift Card Code: <strong>{{ gift_card.code }}</strong></p>
+        <p>Valid until: {{ gift_card.expiry_date|date:"F j, Y" }}</p>
+    </div>
+    
+    <p>To redeem this gift card:</p>
+    <ol>
+        <li>Select the services you'd like to book</li>
+        <li>Enter the gift card code at checkout</li>
+    </ol>
+    
+    <p>If you have any questions, please contact us at {{ contact_info.email }}.</p>
+    <p>Thank you for choosing Spec-A Detailing!</p>
+</div>

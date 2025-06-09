@@ -70,6 +70,16 @@
                         <p class="my-0"><strong>${{ grand_total | floatformat:2 }}</strong></p>
                     </div>
                 </div>
+                {% if gift_card_value > 0 %}
+                <div class="row">
+                    <div class="col-7 offset-2">
+                        <p class="mb-1 mt-0 small text-success">Gift Card Discount:</p>
+                    </div>
+                    <div class="col-3 text-right">
+                        <p class="mb-1 mt-0 small text-success">-${{ gift_card_value|floatformat:2 }}</p>
+                    </div>
+                </div>
+                {% endif %}
             </div>
             <div class="col-12 col-lg-6">
                 <p class="text-muted">Please fill out the form below to complete your order</p>
@@ -103,10 +113,8 @@
                     </fieldset>
                     <fieldset class="px-3">
                         <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                        <!-- A Stripe card element will go here -->
                         <div class="mb-3" id="card-element"></div>
 
-                        <!-- Used to display form errors -->
                         <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
                         <input type="hidden" value="{{ client_secret }}" name="client_secret">
                     </fieldset>
@@ -132,6 +140,32 @@
 						</p>
 					</div>
                 </form>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="mb-3">Have a Gift Card?</h5>
+                        <form id="gift-card-form" action="{% url 'apply_gift_card' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" name="gift_card_code" class="form-control" placeholder="Enter gift card code" 
+                                       {% if applied_gift_card %}value="{{ applied_gift_card.code }}" disabled{% endif %}>
+                                <div class="input-group-append">
+                                    {% if applied_gift_card %}
+                                        <button type="submit" name="remove_gift_card" class="btn btn-outline-danger">Remove</button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-outline-primary">Apply</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </form>
+                        
+                        {% if applied_gift_card %}
+                            <div class="mt-2">
+                                <p class="text-success mb-0">Gift card applied: -€{{ gift_card_value }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
