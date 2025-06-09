@@ -42,7 +42,7 @@ def bag_contents(request):
                     })
                     total += quantity * product.price
                     product_count += quantity
-        except:
+        except Exception as e:
             continue
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
@@ -60,7 +60,7 @@ def bag_contents(request):
         try:
             from products.models import GiftCard
             gift_card = None
-            
+
             try:
                 gift_card = GiftCard.objects.filter(
                     code=request.session['gift_card_code'],
@@ -69,20 +69,21 @@ def bag_contents(request):
             except Exception as e:
                 print(f"Error fetching gift card: {e}")
                 pass
-                
+
             if gift_card:
                 has_expired = False
                 if hasattr(gift_card, 'expiry_date'):
                     has_expired = timezone.now() > gift_card.expiry_date
                     print(f"Gift card expired? {has_expired}")
-                
+
                 if not has_expired and hasattr(gift_card, 'remaining_value') and gift_card.remaining_value > 0:
                     applied_gift_card = gift_card
-                    gift_card_value = min(gift_card.remaining_value, grand_total)
+                    gift_card_value = min(
+                        gift_card.remaining_value, grand_total)
                     new_grand_total = grand_total - gift_card_value
                     if new_grand_total > 0:
                         grand_total = new_grand_total
-                    
+
         except Exception as e:
             print(f"Error applying gift card: {e}")
             if 'gift_card_code' in request.session:
@@ -90,8 +91,7 @@ def bag_contents(request):
 
     if bag_items and grand_total <= 0:
         grand_total = delivery + total
-    
-    
+
     context = {
         'bag_items': bag_items,
         'total': total,

@@ -3,6 +3,7 @@ from django.utils import timezone
 from datetime import timedelta
 from .models import Booking
 
+
 class BookingForm(forms.ModelForm):
     """
     Form for creating a new booking.
@@ -10,13 +11,15 @@ class BookingForm(forms.ModelForm):
     and any special instructions they may have.
     """
     booking_date = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'text', 'class': 'form-control datepicker', 'readonly': 'readonly'}),
+        widget=forms.DateInput(
+            attrs={'type': 'text', 'class': 'form-control datepicker', 'readonly': 'readonly'}),
         help_text="Select your preferred date"
     )
 
     class Meta:
         model = Booking
-        fields = ['booking_date', 'time_slot', 'address', 'special_instructions']
+        fields = ['booking_date', 'time_slot',
+                  'address', 'special_instructions']
         widgets = {
             'time_slot': forms.Select(attrs={'class': 'form-control'}),
             'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
@@ -33,7 +36,8 @@ class BookingForm(forms.ModelForm):
     def clean_booking_date(self):
         """
         Validate the booking date to ensure it is not in the past,
-        is at least one day in advance, and does not exceed 60 days in the future.
+        is at least one day in advance,
+        and does not exceed 60 days in the future.
         """
         booking_date = self.cleaned_data['booking_date']
         today = timezone.now().date()
@@ -42,11 +46,13 @@ class BookingForm(forms.ModelForm):
             raise forms.ValidationError("Booking date cannot be in the past.")
 
         if booking_date < today + timedelta(days=1):
-            raise forms.ValidationError("Bookings must be made at least 1 day in advance.")
+            raise forms.ValidationError(
+                "Bookings must be made at least 1 day in advance.")
 
         if booking_date > today + timedelta(days=60):
-            raise forms.ValidationError("Bookings cannot be made more than 60 days in advance.")
-            
+            raise forms.ValidationError(
+                "Bookings cannot be made more than 60 days in advance.")
+
         return booking_date
 
     def clean(self):

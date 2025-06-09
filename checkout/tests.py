@@ -7,7 +7,7 @@ from .forms import OrderForm
 
 class OrderFormTest(TestCase):
     """Tests for the Order form"""
-    
+
     def test_order_form_valid_data(self):
         """Test the Order form with valid data"""
         form = OrderForm(data={
@@ -19,7 +19,7 @@ class OrderFormTest(TestCase):
             'country': 'IE',
         })
         self.assertTrue(form.is_valid())
-    
+
     def test_order_form_no_data(self):
         """Test the Order form with no data"""
         form = OrderForm(data={})
@@ -29,7 +29,7 @@ class OrderFormTest(TestCase):
 
 class CheckoutViewsTest(TestCase):
     """Tests for checkout views"""
-    
+
     def setUp(self):
         # Create a user for testing
         self.user = User.objects.create_user(
@@ -37,7 +37,7 @@ class CheckoutViewsTest(TestCase):
             email='test@example.com',
             password='testpassword'
         )
-    
+
     def test_checkout_view_empty_bag(self):
         """Test checkout view with empty bag redirects"""
         response = self.client.get(reverse('checkout'))

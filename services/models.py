@@ -6,13 +6,17 @@ import datetime
 
 class Service(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True, help_text="URL-friendly name")
+    slug = models.SlugField(max_length=255, unique=True,
+                            help_text="URL-friendly name")
     description = models.TextField()
     image = models.ImageField(upload_to='services/', blank=True, null=True)
-    price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, help_text="Base price in EUR")
-    duration = models.CharField(max_length=100, blank=True, help_text="e.g. 1 hour, 2-3 hours")
+    price = models.DecimalField(
+        max_digits=8, decimal_places=2, blank=True, null=True, help_text="Base price in EUR")
+    duration = models.CharField(
+        max_length=100, blank=True, help_text="e.g. 1 hour, 2-3 hours")
     is_active = models.BooleanField(default=True)
-    order = models.PositiveIntegerField(default=0, help_text="Ordering of services on the site")
+    order = models.PositiveIntegerField(
+        default=0, help_text="Ordering of services on the site")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -38,33 +42,36 @@ class Booking(models.Model):
         ('completed', 'Completed'),
         ('cancelled', 'Cancelled'),
     )
-    
+
     TIME_SLOTS = (
         ('morning', '8:00 AM - 12:00 PM'),
         ('afternoon', '1:00 PM - 5:00 PM'),
     )
-    
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings')
-    service = models.ForeignKey('Service', on_delete=models.CASCADE, related_name='bookings')
+
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='bookings')
+    service = models.ForeignKey(
+        'Service', on_delete=models.CASCADE, related_name='bookings')
     booking_date = models.DateField()
     time_slot = models.CharField(max_length=20, choices=TIME_SLOTS)
     address = models.TextField(help_text="Where should we meet you?")
     special_instructions = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=20, choices=BOOKING_STATUS, default='pending')
-    
+    status = models.CharField(
+        max_length=20, choices=BOOKING_STATUS, default='pending')
+
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         ordering = ['booking_date', 'time_slot']
         unique_together = ['booking_date', 'time_slot']
-        
+
     def __str__(self):
         return f"{self.service.name} on {self.booking_date} ({self.get_time_slot_display()})"
-        
+
     def is_past_booking(self):
         return self.booking_date < timezone.now().date()
-        
+
     def can_cancel(self):
         booking_datetime = timezone.make_aware(
             datetime.datetime.combine(self.booking_date, datetime.time(0, 0))

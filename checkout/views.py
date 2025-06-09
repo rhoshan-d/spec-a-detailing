@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse
+)
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -59,10 +61,10 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            
+
             current_bag = bag_contents(request)
             grand_total = current_bag['grand_total']
-            
+
             order.grand_total = grand_total
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
@@ -88,22 +90,29 @@ def checkout(request):
                             )
                             order_line_item.save()
                 except Product.DoesNotExist:
-                    messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                    messages.error(
+                        request,
+                        ("One of the products in your bag wasn't found in our database. "
+                         "Please call us for assistance!")
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(
+                reverse('checkout_success', args=[order.order_number])
+            )
         else:
-            messages.error(request, 'There was an error with your form. \
-                Please double check your information.')
+            messages.error(
+                request,
+                'There was an error with your form. '
+                'Please double check your information.'
+            )
     else:
         bag = request.session.get('bag', {})
         if not bag:
-            messages.error(request, "There's nothing in your bag at the moment")
+            messages.error(
+                request, "There's nothing in your bag at the moment")
             return redirect(reverse('products'))
 
         current_bag = bag_contents(request)
@@ -138,8 +147,11 @@ def checkout(request):
             order_form = OrderForm()
 
         if not stripe_public_key:
-            messages.warning(request, 'Stripe public key is missing. \
-                Did you forget to set it in your environment?')
+            messages.warning(
+                request,
+                'Stripe public key is missing. '
+                'Did you forget to set it in your environment?'
+            )
 
         template = 'checkout/checkout.html'
         context = {
@@ -157,17 +169,19 @@ def checkout_success(request, order_number):
     """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
-    
+
     gift_cards = []
-    
+
     for line_item in order.lineitems.all():
         product = line_item.product
-        if hasattr(product, 'category') and product.category and product.category.name == 'gift_vouchers':
+        if (hasattr(product, 'category') and product.category and
+                product.category.name == 'gift_vouchers'):
             for i in range(line_item.quantity):
-                code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
-                
+                code = ''.join(random.choices(
+                    string.ascii_uppercase + string.digits, k=8))
+
                 expiry_date = timezone.now() + timezone.timedelta(days=365)
-                
+
                 gift_card = GiftCard.objects.create(
                     code=code,
                     original_value=product.price,
@@ -178,17 +192,20 @@ def checkout_success(request, order_number):
                     is_active=True
                 )
                 gift_cards.append(gift_card)
-                
+
     if 'bag' in request.session:
         del request.session['bag']
-        
+
     if 'gift_card_code' in request.session:
         del request.session['gift_card_code']
-        
-    messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
-        
+
+    messages.success(
+        request,
+        f'Order successfully processed! '
+        f'Your order number is {order_number}. A confirmation '
+        f'email will be sent to {order.email}.'
+    )
+
     from checkout.webhook_handler import StripeWH_Handler
     handler = StripeWH_Handler(request)
     handler._send_confirmation_email(order)
@@ -209,5 +226,5 @@ def checkout_success(request, order_number):
         'order': order,
         'gift_cards': gift_cards,
     }
-    
+
     return render(request, template, context)

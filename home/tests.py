@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class HomeViewsTest(TestCase):
     """Tests for the home app views"""
-    
+
     def test_index_view(self):
         """Test the index view loads properly"""
         response = self.client.get(reverse('home'))

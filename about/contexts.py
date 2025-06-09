@@ -13,7 +13,7 @@ def site_info(request):
             'facebook': 'https://facebook.com/specadetailing',
         }
     }
-    
+
     return {
         'contact_info': contact_info,
     }
